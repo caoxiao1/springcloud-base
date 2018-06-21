@@ -1,0 +1,51 @@
+spring:
+  profiles:
+    #默认使用下面哪个配置项。启动项目的时候 可使用 -Dspring.profiles.active=dev 更换使用的配置项
+    active: dev
+   #服务配置信息
+  application:
+    name: ${server.hostname}
+  cloud:
+    #配置服务器的设置信息
+    config:
+      #采用的文件类型 即：生产环境，测试环境。。
+      profile: ${spring.profiles.active}
+      label: master
+      #配置服务器的访问地址
+      uri: http://127.0.0.1:8888
+
+#将不同的配置以---分割
+---
+spring:
+  profiles: server
+port: 8702
+server:
+  hostname: 10.31.23.179
+---
+spring:
+  profiles: dev
+port: 8702
+server:
+  #hostname: eurekaSer1
+  hostname: localhost
+---
+
+#以下信息 尽量配置到git文件上，然后通过配置服务器获取
+server:
+  port: 8702
+eureka:
+  instance:
+    #eureka服务器的标识，如果是集群就可以写成 eurekaSer1,eurekaSer2,eurekaSer3..
+    #hostname: eurekaSer1
+    hostname: ${server.hostname}
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    #开启客户端存活状态监测
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://${server.hostname}:${server.port}/eureka/
+      #defaultZone: http://eurekaSer1:8701/eureka/
+    server:
+      enable-self-preservation: false  

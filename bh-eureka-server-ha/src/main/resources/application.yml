@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: bh-eureka-server
+server:
+  port: 8702
+eureka:
+  instance:
+    hostname: eurekaSerHA
+    preferIpAddress: true
+#    instanceId: ${spring.cloud.client.ipAddress}:${server.port}
+    instanceId: ${spring.cloud.client.hostname}:${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://eurekaSer:8701/eureka/

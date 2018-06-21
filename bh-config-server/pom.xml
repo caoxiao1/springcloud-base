@@ -1,0 +1,80 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.echinalife.clbh</groupId>
+		<artifactId>bh-cloud</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>bh-config-server</artifactId>
+	<packaging>jar</packaging>
+	<name>bh-config-server</name>
+	<description>Cloud config server project for China life bighealth</description>
+	
+	<!-- 
+		如果与父版本一致，可忽略
+	 -->
+	<version>0.0.1.1-SNAPSHOT</version>
+  	
+    <dependencies> 
+    
+    	<!-- Spring Boot -->
+        <dependency>  
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-test</artifactId>  
+            <scope>test</scope>  
+        </dependency>  
+         <dependency>  
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-actuator</artifactId>  
+        </dependency>  
+        <dependency>  
+	        <groupId>org.springframework.boot</groupId>  
+	        <artifactId>spring-boot-devtools</artifactId>  
+	        <optional>true</optional><!-- optional=true,依赖不会传递，该项目依赖devtools；之后依赖myboot项目的项目如果想要使用devtools，需要重新引入 -->  
+	    </dependency>  
+        
+        <!-- Spring Cloud -->
+        <dependency>  
+            <groupId>org.springframework.cloud</groupId>  
+            <artifactId>spring-cloud-config-server</artifactId>  
+        </dependency>  
+        <dependency>  
+            <groupId>org.springframework.cloud</groupId>  
+            <artifactId>spring-cloud-starter-eureka</artifactId>  
+        </dependency>  
+        
+        <!-- https://mvnrepository.com/artifact/org.tmatesoft.svnkit/svnkit -->  
+        <dependency>  
+            <groupId>org.tmatesoft.svnkit</groupId>  
+            <artifactId>svnkit</artifactId>  
+        </dependency>  
+        
+    </dependencies>  
+  
+    <dependencyManagement>  
+        <dependencies>  
+            <dependency>  
+                <groupId>org.springframework.cloud</groupId>  
+                <artifactId>spring-cloud-dependencies</artifactId>  
+                <version>${spring-cloud.version}</version>  
+                <type>pom</type>  
+                <scope>import</scope>  
+            </dependency>  
+        </dependencies>  
+    </dependencyManagement>  
+  
+    <build>  
+        <plugins>  
+            <plugin>  
+                <groupId>org.springframework.boot</groupId>  
+                <artifactId>spring-boot-maven-plugin</artifactId>  
+            </plugin>  
+        </plugins>  
+    </build>  
+    
+</project>

@@ -1,0 +1,185 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+  <modelVersion>4.0.0</modelVersion>
+  
+  <!-- 微服务开发架构父工程 -->
+  <groupId>com.echinalife.clbh</groupId>
+  <artifactId>bh-cloud</artifactId>
+  <packaging>pom</packaging>
+  
+  <!-- 微服务开发架构主版本，支持子工程小版本号 -->
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <!-- 控制所有版本微服务主版本 -->
+  <parent>
+      <groupId>org.springframework.boot</groupId>  
+      <artifactId>spring-boot-starter-parent</artifactId>  
+      <version>1.5.8.RELEASE</version>  
+      <relativePath/> <!-- lookup parent from repository -->  
+  </parent>  
+  
+  <!-- 微服务开发架构整体一览
+  <modules>
+  	<module>bh-config-server</module>
+  	<module>bh-eureka-server</module>
+  	<module>bh-eureka-server-ha</module>
+  	<module>bh-gateway</module>
+  	<module>bh-serv-architect</module>
+  	<module>bh-serv-authadmin</module>
+  	<module>bh-serv-demo</module>
+  </modules>
+   -->
+  	<!-- More Cloud Serv -->
+  
+  <!-- 通用开发架构依赖jar的版本控制 -->
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>  
+    <java.version>1.8</java.version>  
+    <spring-cloud.version>Dalston.SR4</spring-cloud.version>  
+    
+    <!-- 第三方 spring boot 组件 mybatis -->
+    <druid-spring-boot-starter.version>1.1.0</druid-spring-boot-starter.version>
+	<mybatis-spring-boot.version>1.2.0</mybatis-spring-boot.version>
+	<mapper-spring-boot-starter.version>1.1.7</mapper-spring-boot-starter.version>
+	<pagehelper-spring-boot-starter.version>1.2.3</pagehelper-spring-boot-starter.version>
+	
+  </properties>
+  
+  <dependencyManagement>
+  	
+  	<!--架包依赖 start-->
+	<dependencies>
+	
+		<!-- 第三方 Spring Boot 组件 -->
+		<!-- TODO -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid-spring-boot-starter.version}</version>
+        </dependency>
+
+        <!--mybatis-->
+        <dependency>
+	        <groupId>org.mybatis.spring.boot</groupId>
+	        <artifactId>mybatis-spring-boot-starter</artifactId>
+	        <version>${mybatis-spring-boot.version}</version>
+	    </dependency>
+        
+        <!--mapper for mybatis-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>${mapper-spring-boot-starter.version}</version>
+        </dependency>
+        
+        <!--pagehelper for mybatis-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper-spring-boot-starter.version}</version>
+        </dependency>
+        
+	</dependencies>
+	
+  </dependencyManagement>
+  
+  <pluginRepositories>
+	<pluginRepository>
+	  <releases>
+		<updatePolicy>never</updatePolicy>
+	  </releases>
+	  <snapshots>
+		<enabled>false</enabled>
+	  </snapshots>
+	  <id>central</id>
+	  <name>Central Repository</name>
+	  <url>https://repo.maven.apache.org/maven2</url>
+	</pluginRepository>
+	<pluginRepository>
+	  <id>nexus</id>  
+      <name>Nexus Repository</name>  
+      <url>http://10.31.60.92:8081/nexus/content/groups/public/</url>  
+      <releases>  
+          <updatePolicy>never</updatePolicy>
+      </releases>  
+      <snapshots>  
+         <enabled>false</enabled>  
+      </snapshots>  
+	</pluginRepository>
+  </pluginRepositories>
+
+  <repositories>
+  	
+  	<!-- 中央仓库 -->
+	<repository>
+	  <snapshots>
+		<enabled>false</enabled>
+	  </snapshots>
+	  <id>central</id>
+	  <name>Central Repository</name>
+	  <url>https://repo.maven.apache.org/maven2</url>
+	</repository>
+  	
+  	<!-- 自有仓库一 -->
+	<repository>  
+      <id>nexus</id>  
+      <name>Nexus Repository</name>  
+      <url>http://10.31.60.92:8081/nexus/content/groups/public/</url>  
+      <releases>  
+          <enabled>true</enabled>  
+      </releases>  
+      <snapshots>  
+         <enabled>true</enabled>  
+      </snapshots>  
+	</repository>
+	
+	<!-- 自有仓库二
+	<repository>  
+      <id>nexus</id>  
+      <name>Nexus Repository</name>  
+      <url>http://10.31.58.211:8081/content/groups/public/</url>  
+      <releases>  
+          <enabled>true</enabled>  
+      </releases>  
+      <snapshots>  
+         <enabled>true</enabled>  
+      </snapshots>  
+	</repository>
+	 -->
+	
+	<!-- 自有仓库三
+	<repository>  
+      <id>nexus</id>  
+      <name>Nexus Repository</name>  
+      <url>http://10.31.20.28:8081/nexus/content/groups/public/</url>  
+      <releases>  
+          <enabled>true</enabled>  
+      </releases>  
+      <snapshots>  
+         <enabled>true</enabled>  
+      </snapshots>  
+	</repository>
+	 -->
+	
+  </repositories>
+  
+  <!--
+  	构件分发到远程仓库 
+   -->
+  <distributionManagement>
+	<repository>
+		<id>releases</id>
+		<name>Nexus ReleaseRepository</name>
+		<url>http://10.31.60.92:8081/nexus/content/repositories/releases/</url>
+	</repository>
+	<snapshotRepository>
+		<id>snapshots</id>
+		<name>Nexus SnapshotRepository</name>
+		<url>http://10.31.60.92:8081/nexus/content/repositories/snapshots/</url>
+	</snapshotRepository>
+  </distributionManagement>
+  
+</project>
